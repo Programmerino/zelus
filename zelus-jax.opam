@@ -1,0 +1,30 @@
+opam-version: "2.0"
+version: "0.1"
+synopsis: "Zelus JAX library"
+authors: [
+  "Guillaume Baudart"
+  "Reyyan Tekin"
+  "Davis Davalos-DeLosh <davis.davalos.delosh@gmail.com>"
+]
+maintainer: ["Davis Davalos-DeLosh <davis.davalos.delosh@gmail.com>"]
+homepage: "http://zelus.di.ens.fr"
+bug-reports: "https://github.com/INRIA/zelus/issues"
+depends: [
+  "dune" {>= "2.6"}
+  "zelus"
+]
+build: [
+  ["dune" "subst"] {pinned}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/INRIA/zelus.git"
