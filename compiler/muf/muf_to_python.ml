@@ -289,6 +289,12 @@ let compile_decl : type a. formatter -> a declaration -> unit = begin
         fprintf ff "%a = %a@,"
             compile_patt p
             compile_expr e
+    (* For single-argument functions, pass it directly *)
+    | Dfun (f, ({patt = Pid _} as p), e) ->
+        fprintf ff "@[<v 4>def %s(arg):@,%a = arg@,%a@]"
+          f
+          compile_patt p
+          compile_return e
     | Dfun (f, p, e) ->
         fprintf ff "@[<v 4>def %s(*args):@,%a = args@,%a@]"
           f
